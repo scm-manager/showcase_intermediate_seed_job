@@ -1,0 +1,21 @@
+#!groovy
+pipeline {
+  options {
+    buildDiscarder(logRotator(numToKeepStr: '10'))
+    disableConcurrentBuilds()
+  }
+
+  environment {
+    HOME = "${env.WORKSPACE}"
+  }
+
+  stages {
+    stage('Validate core version') {
+      steps {
+        script {
+          sh 'ls'
+        }
+      }
+    }
+  }
+}
