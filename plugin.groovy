@@ -55,12 +55,16 @@ def createFolders() {
 }
 
 def createIncomingJenkinsfile() {
+  String template = new File("templates/Jenkinsfile.template").text
+  template = template.replace("{{fqdn}}", "${instanceName}-public.cloudogu.net")
+  new File("Jenkinsfile.default").text = template
+
   configFiles {
     groovyScript {
       id('IncomingJenkinsfile')
       name('Jenkinsfile')
       comment('Jenkinsfile for incoming repositories')
-      content('templates/Jenkinsfile.default')
+      content('Jenkinsfile.default')
     }
   }
 }
