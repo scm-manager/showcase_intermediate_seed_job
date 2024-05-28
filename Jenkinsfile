@@ -2,8 +2,8 @@ node {
 
   properties([
     parameters([
-      string(name: 'instanceName', trim: true, description: repositoryNameDescription(), defaultValue: 'none'),
-      string(name: 'repositoryName', trim: true, description: repositoryNameDescription(), defaultValue: 'none'),
+      string(name: 'instanceName', trim: true, description: "The URL of the public instance", defaultValue: 'none'),
+      string(name: 'repositoryName', trim: true, description: "The name of the repository", defaultValue: 'none'),
     ])
   ])
 
@@ -12,7 +12,7 @@ node {
   }
 
   stage('Create Job') {
-    if (env.BRANCH_NAME == 'master') {
+    if (env.BRANCH_NAME == 'main') {
       currentBuild.description = params.pluginName
       jobDsl targets: 'plugin.groovy'
     } else {
